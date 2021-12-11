@@ -22,6 +22,16 @@ const mapConfigs = {
         ay: 0,
         aw: 82,
         ah: 37
+    },
+    map3: {
+        jx: 1840,
+        jy: 700,
+        jw: 3170 - 1840,
+        jh: 1660 - 700,
+        ax: 0,
+        ay: 0,
+        aw: 143,
+        ah: 103
     }
 }
 

@@ -23,8 +23,8 @@ export class MainView {
         parentElement.appendChild(this.app.view)
     }
 
-    async init () {
-        this.resources = await new Promise((resolve, reject) => this.app.loader.add('ustmap', 'Academic Building.jpg').load((loader, resources) => resolve(resources)))
+    async init (map = '1.jpg') {
+        this.resources = await new Promise((resolve, reject) => this.app.loader.add('ustmap', map).load((loader, resources) => resolve(resources)))
         this.ustmapTexture = this.resources.ustmap.texture
 
         this.viewport = new Viewport({

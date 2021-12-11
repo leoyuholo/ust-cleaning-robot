@@ -10,9 +10,10 @@ const canvasVp = document.querySelector('#canvas-vp')
 canvasVp.style.width = `${vpWidth}px`
 
 const mainView = new MainView(canvasVp, vpWidth, vpHeight)
-mainView.init()
+const mapId = document.location.pathname.split('/').slice(-1)[0].split('.')[0]
+mainView.init(`${mapId}.jpg`)
     .then(() => {
-        // findPath()
+        findPath()
     })
 
 const findPath = async () => {
@@ -34,7 +35,7 @@ findPathBtn.addEventListener('click', (e) => {
 })
 
 // _.range(5).forEach(i => {
-_.range(3).forEach(i => {
+_.range(4).forEach(i => {
     const nRobotsRadio = document.querySelector(`#nRobots${i+1}`)
     nRobotsRadio.addEventListener('change', (e) => {
         console.log(i, +nRobotsRadio.value)
