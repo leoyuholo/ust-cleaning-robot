@@ -111,6 +111,7 @@ export class MainView {
     drawCleanedPaths = (t) => {
         if ((this.currentT > t) || !this.cleanedLines) {
             this.cleanedLines = this.resetLines(this.cleanedLines, this.paths.length)
+            this.cleanedCircles = this.resetLines(this.cleanedCircles, this.paths.length)
             this.currentT = 0
         }
 
@@ -122,62 +123,41 @@ export class MainView {
         let currentT = this.currentT
 
         if (currentT === 0 || !this.cleanedLines[n]) {
-            this.cleanedLines[n] = this.cleanedLines[n] = this.viewport.addChild(new PIXI.Graphics())
+            this.cleanedLines[n]?.destroy?.()
+            this.cleanedLines[n] = this.viewport.addChild(new PIXI.Graphics())
             this.cleanedLines[n].lineStyle(1, PIXI.utils.string2hex(colorMap[n]), 0.7);
             this.cleanedLines[n].moveTo(...this.coorj2c(...p[0]))
 
-            // if (n === 0) console.log('init line', n, currentT, t)
+            this.cleanedCircles[n]?.destroy?.()
+            this.cleanedCircles[n] = this.viewport.addChild(new PIXI.Graphics())
+            this.cleanedCircles[n].lineStyle(1, PIXI.utils.string2hex(colorMap[n]), 1);
+            this.cleanedCircles[n].beginFill(0xFFFFFF, 0.5);
+            this.cleanedCircles[n].drawCircle(...this.coorj2c(...p[0]), 2);
+            this.cleanedCircles[n].endFill();
+
+            if (n === 0) console.log('init line', n, currentT, t)
 
             currentT += 1
         }
 
         t = Math.min(t, p.length)
         currentT = Math.min(currentT, p.length)
+        const mainView = this
         if (currentT > 0 && currentT < t)
             _.range(currentT, t).forEach(i => {
-                // if (n === 0) console.log('draw line', n, currentT, t)
                 this.cleanedLines[n].moveTo(...this.coorj2c(...p[i-1]))
-                this.cleanedLines[n].lineTo(...this.coorj2c(...p[i]))
+                const newPosition = this.coorj2c(...p[i])
+                this.cleanedLines[n].lineTo(...newPosition)
+
+                this.cleanedCircles[n]?.destroy?.()
+                this.cleanedCircles[n] = mainView.viewport.addChild(new PIXI.Graphics())
+                this.cleanedCircles[n].lineStyle(1, PIXI.utils.string2hex(colorMap[n]), 1);
+                this.cleanedCircles[n].beginFill(0xFFFFFF, 0.5);
+                this.cleanedCircles[n].drawCircle(...newPosition, 2);
+                this.cleanedCircles[n].endFill();
+
+                if (n === 0) console.log('draw line', n, currentT, t, ...newPosition)
             })
-    }
-
-    drawPath = () => {
-        const planLine = this.viewport.addChild(new PIXI.Graphics())
-        planLine.lineStyle(1, PIXI.utils.string2hex(colorMap[0]), 0.2);
-        planLine.moveTo(...this.coorj2c(...map1n3r1[0]))
-        map1n3r1.slice(1).forEach(coor => {
-            // console.log(...coorj2c(...coor))
-            planLine.lineTo(...coorj2c(...coor))
-        })
-
-        const cleanLine = viewport.addChild(new PIXI.Graphics())
-        let n = 1
-        const onTick = () => {
-            console.log('tick')
-            cleanLine.lineStyle(1, PIXI.utils.string2hex(colorMap[0]), 1);
-            cleanLine.moveTo(...coorj2c(...map1n3r1[n-1]))
-            cleanLine.lineTo(...coorj2c(...map1n3r1[n]))
-            n += 1
-            if (n >= map1n3r1.length) {
-                this.app.ticker.remove(onTick)
-            }
-        }
-        this.app.ticker.add(onTick)
-    }
-
-    drawFindPathButton = () => {
-        const findPathButton = this.app.stage.addChild(new PIXI.Graphics())
-        findPathButton.lineStyle(1, 0x000000, 1)
-        findPathButton.beginFill(0xFFFFFF, 1)
-        findPathButton.drawRect(this.vpWidth - 160, this.vpHeight - 80, 100, 30)
-        findPathButton.endFill()
-        const findPathButtonText = this.app.stage.addChild(new PIXI.Text('Find Path',{fontFamily : 'Arial', fontSize: 20, fill : 0x000000, align : 'center'}))
-        findPathButtonText.position.x = this.vpWidth - 155
-        findPathButtonText.position.y = this.vpHeight - 75
-        findPathButton.interactive = true
-        findPathButton.on('mousedown', (e) => {
-            this.drawPath()
-        })
     }
 
     drawLegend = () => {

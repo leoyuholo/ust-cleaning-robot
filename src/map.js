@@ -1,4 +1,5 @@
 import * as output from './output'
+import { sleep } from './Playback'
 import * as _ from 'lodash'
 
 // y:0(1566)-52(2551), x:0(6034)-147(8784)
@@ -60,6 +61,7 @@ export const map = {
     findPath: async (params) => {
     //     console.log(params)
     //     console.log(output[`map${params.map}`][params.nRobot])
+        await sleep(1000)
         return Object.values(output[`map${params.map}`][params.nRobot]).map(a => coora2j(a, mapConfigs[`map${params.map}`]))
     }
 }

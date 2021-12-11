@@ -1,6 +1,6 @@
 import EventEmitter from 'eventemitter3'
 
-function sleep(ms) {
+export function sleep (ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
@@ -13,6 +13,9 @@ export class Playback extends EventEmitter {
         this.playbackBtn = playbackElement.querySelector('#playback-btn')
         this.playbackText = playbackElement.querySelector('#playback-text')
         this.playbackTime = playbackElement.querySelector('#playback-time')
+
+        this.playbackBtn.disabled = false
+        this.playbackTime.disabled = false
 
         const updatePlaybackText = () => {
             this.playbackText.innerText = `${this.t} / ${this.playbackLength}`

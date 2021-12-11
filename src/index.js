@@ -16,15 +16,20 @@ mainView.init(`${mapId}.jpg`)
         // findPath()
     })
 
+let playback = null
 const findPath = async () => {
     const params = {
         map: document.querySelector('#select-region').value,
         nRobot: mainView.nRobot,
         robotCoors: mainView.robotCoors
     }
+    findPathBtn.innerText = 'Computing...'
+    findPathBtn.disabled = true
     const paths = await map.findPath(params)
+    findPathBtn.disabled = false
+    findPathBtn.innerText = 'Find Path'
     mainView.drawPlannedPaths(paths)
-    const playback = new Playback(mainView, document.querySelector('#playback-control'))
+    playback = playback || new Playback(mainView, document.querySelector('#playback-control'))
     playback.play(0)
     playback.pause()
 }
