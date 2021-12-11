@@ -32,6 +32,16 @@ const mapConfigs = {
         ay: 0,
         aw: 143,
         ah: 103
+    },
+    map4: {
+        jx: 5055,
+        jy: 727,
+        jw: 6660 - 5055,
+        jh: 1234 - 727,
+        ax: 0,
+        ay: 0,
+        aw: 171,
+        ah: 53
     }
 }
 
@@ -39,9 +49,6 @@ _.forEach(mapConfigs, m => {
     m.jxratio = m.jw / m.aw
     m.jyratio = m.jh / m.ah
 })
-
-// map1config.jxratio = map1config.jw / map1config.aw
-// map1config.jyratio = map1config.jh / map1config.ah
 
 const coora2j = (p, config) => {
     return p.map(([x, y]) => {
@@ -51,8 +58,8 @@ const coora2j = (p, config) => {
 
 export const map = {
     findPath: async (params) => {
-        console.log(params)
-        console.log(output[`map${params.map}`][params.nRobot])
+    //     console.log(params)
+    //     console.log(output[`map${params.map}`][params.nRobot])
         return Object.values(output[`map${params.map}`][params.nRobot]).map(a => coora2j(a, mapConfigs[`map${params.map}`]))
     }
 }

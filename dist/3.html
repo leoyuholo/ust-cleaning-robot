@@ -12,10 +12,18 @@
     <div id="control">
       <form>
         <div class="row row-cols-lg-auto g-3 align-items-center">
+          <label for="select-region" class="col-lg col-form-label col-form-label-sm">Select Floor</label>
+          <div class="col-lg">
+            <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);" class="form-control" id="select-floor">
+              <option value="/pixi/dist/3.html" selected="selected">G/F</option>
+              <option value="/pixi/dist/1.html">1/F</option>
+              <option value="/pixi/dist/4.html">2/F</option>
+            </select>
+          </div>
           <label for="select-region" class="col-lg col-form-label col-form-label-sm">Select Region</label>
           <div class="col-lg-4">
             <select class="form-control" id="select-region">
-              <option value=3>G/F Atrium)</option>
+              <option value=3>G/F Atrium</option>
             </select>
           </div>
           <label for="select-region" class="col-lg col-form-label col-form-label-sm">Number of Robots</label>
@@ -32,14 +40,14 @@
               <input class="form-check-input" type="radio" name="nRobots" id="nRobots3" value="3" checked>
               <label class="form-check-label" for="nRobots3">3</label>
             </div>
-            <div class="form-check form-check-inline">
+            <!-- <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="nRobots" id="nRobots4" value="4">
               <label class="form-check-label" for="nRobots4">4</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="nRobots" id="nRobots5" value="5">
               <label class="form-check-label" for="nRobots5">5</label>
-            </div>
+            </div> -->
           </div>
           <button type="button" class="btn btn-primary" id="findpath-btn">Find Path</button>
         </div>
