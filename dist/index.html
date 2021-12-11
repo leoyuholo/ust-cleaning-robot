@@ -19,25 +19,23 @@
               <option>2/F Corridor (Outside Engineering Commons)</option>
             </select>
           </div>
-          <button type="submit" class="btn btn-primary">Find Path</button>
+          <button type="button" class="btn btn-primary" id="findpath-btn">Find Path</button>
         </div>
       </form>
-      <!-- <button type="submit" class="btn btn-primary">Find Path</button> -->
     </div>
     <div id="canvas-vp"></div>
 
     <div id="playback-control">
       <form>
         <div class="row row-cols-lg-auto g-3 align-items-center">
-          <button type="submit" class="btn btn-primary">&#9654;</button>
+          <button type="button" class="btn btn-primary" id="playback-btn">&#9654;</button>
           <label for="playback-time" class="col-lg col-form-label col-form-label-sm"></label>
           <div class="col-lg-9">
-            <label for="playback-time" class="form-label" id="playback-text">12 / 3000</label>
-            <input type="range" class="form-range" min="0" max="5" step="1" id="playback-time">
+            <label for="playback-time" class="form-label" id="playback-text">-- / --</label>
+            <input type="range" class="form-range" min="0" max="0" step="1" value="0" id="playback-time">
           </div>
         </div>
       </form>
-      <!-- <button type="submit" class="btn btn-primary">Find Path</button> -->
     </div>
     <script src="main.js"></script>
   </body>

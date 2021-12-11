@@ -1,4 +1,4 @@
-export const map1n3r1path = [
+export const map1n3r0path = [
     [16, 0],
     [15, 0],
     [15, 0],
