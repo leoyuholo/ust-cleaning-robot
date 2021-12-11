@@ -81,6 +81,7 @@ export class MainView {
     }
 
     setRobotCoor = (n, x, y) => {
+        console.log(n, x, y)
         this.robotCoors[n] = [x, y]
     }
 
@@ -180,9 +181,10 @@ export class MainView {
     }
 
     drawLegend = () => {
+        if (this.legendItems) this.legendItems.forEach(i => i.destroy())
         this.legendItems = _.range(this.nRobot).map(n => {
             const legendItem = new LegendItem(this, n)
-            legendItem.on('coorchange', newPosition => this.setRobotCoor(n, [newPosition.x, newPosition.y]))
+            legendItem.on('coorchange', newPosition => this.setRobotCoor(n, ...this.coorc2j(newPosition.x, newPosition.y)))
             return legendItem
         })
     }
@@ -231,7 +233,7 @@ class LegendItem extends EventEmitter {
                 const newWorldPosition = mainView.viewport.toWorld(newPosition.x, newPosition.y)
                 legendItem.emit('coorchange', newWorldPosition)
                 // legendItem.robotCoors[n] = [...mainView.coorc2j(newWorldPosition.x, newWorldPosition.y)]
-                this.targetCircle.position.set(newWorldPosition.x, newWorldPosition.y)
+                legendItem.targetCircle.position.set(newWorldPosition.x, newWorldPosition.y)
             }
         }
 
@@ -253,6 +255,6 @@ class LegendItem extends EventEmitter {
     destroy () {
         this.text.destroy()
         this.circle.destroy()
-        this.targetCircle.destroy()
+        this.targetCircle && this.targetCircle.destroy()
     }
 }
