@@ -20,6 +20,7 @@ let playback = null
 const findPath = async () => {
     const params = {
         map: document.querySelector('#select-region').value,
+        algorithm: document.querySelector('#select-algorithm').value,
         nRobot: mainView.nRobot,
         robotCoors: mainView.robotCoors
     }

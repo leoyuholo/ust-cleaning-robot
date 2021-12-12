@@ -12,7 +12,7 @@
     <div id="control">
       <form>
         <div class="row row-cols-lg-auto g-3 align-items-center">
-          <label for="select-region" class="col-lg col-form-label col-form-label-sm">Select Floor</label>
+          <label for="select-floor" class="col-lg col-form-label col-form-label-sm">Select Floor</label>
           <div class="col-lg">
           <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);" class="form-control" id="select-floor">
             <option value="/pixi/dist/3.html">G/F</option>
@@ -27,7 +27,7 @@
               <option value=2>1/F Corridor (Outside LT-D)</option>
             </select>
           </div>
-          <label for="select-region" class="col-lg col-form-label col-form-label-sm">Number of Robots</label>
+          <label for="nRobots" class="col-lg col-form-label col-form-label-sm">Number of Robots</label>
           <div class="col-lg">
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="nRobots" id="nRobots1" value="1">
@@ -49,6 +49,13 @@
               <input class="form-check-input" type="radio" name="nRobots" id="nRobots5" value="5">
               <label class="form-check-label" for="nRobots5">5</label>
             </div> -->
+          </div>
+          <label for="select-algorithm" class="col-lg col-form-label col-form-label-sm">Algorithm</label>
+          <div class="col-lg">
+            <select class="form-control" id="select-algorithm">
+              <option value=1>1</option>
+              <option value=2>2</option>
+            </select>
           </div>
           <button type="button" class="btn btn-primary" id="findpath-btn">Find Path</button>
         </div>

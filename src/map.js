@@ -59,9 +59,16 @@ const coora2j = (p, config) => {
 
 export const map = {
     findPath: async (params) => {
-    //     console.log(params)
-    //     console.log(output[`map${params.map}`][params.nRobot])
+        const map = `map${params.map}`
+        let robot = +`${params.nRobot}${+params.algorithm === 1 ? '' : params.algorithm}`
+        let paths = output[map][robot]
+        // console.log(params, map, robot, paths)
+        if (!paths) {
+            console.log(`No paths for map ${map} robot ${robot}`)
+            robot = params.nRobot
+            paths = output[map][robot]
+        }
         await sleep(1000)
-        return Object.values(output[`map${params.map}`][params.nRobot]).map(a => coora2j(a, mapConfigs[`map${params.map}`]))
+        return Object.values(paths).map(a => coora2j(a, mapConfigs[`map${params.map}`]))
     }
 }
