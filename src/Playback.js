@@ -61,7 +61,7 @@ export class Playback extends EventEmitter {
             this.t += 1
             this.emit('playing', this.t)
 
-            await sleep(50)
+            await sleep(2)
         }
     }
 
